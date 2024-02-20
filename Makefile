@@ -6,13 +6,13 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/02/20 16:56:24 by acroue           ###   ########.fr        #
+#    Updated: 2024/02/20 17:46:26 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Program name
-NAME = project
-BONUS = project_bonus
+NAME = philosophers
+BONUS = philosophers_bonus
 
 # Colors
 DEFAULT    = \033[0m
@@ -48,7 +48,7 @@ endef
 INCLUDES := $(strip $(INCLUDES))
 
 define SRC :=
-	EXAMPLE.c
+	main.c
 endef
 SRC := $(strip $(SRC))
 

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:43:07 by acroue            #+#    #+#             */
-/*   Updated: 2024/02/20 17:43:55 by acroue           ###   ########.fr       */
+/*   Updated: 2024/02/20 17:45:40 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	main(int argc, char const *argv[])
 {
+	(void)argc;
+	(void)argv;
 	ft_printf("Nul n'entre ici s'il n'est philosophe\n");
 	return (0);
 }
