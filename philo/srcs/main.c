@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:43:07 by acroue            #+#    #+#             */
-/*   Updated: 2024/02/21 15:05:37 by acroue           ###   ########.fr       */
+/*   Updated: 2024/02/21 19:54:50 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ size_t	ft_strlen(char *str)
 int	arg_check(int argc, char **argv)
 {
 	size_t	i;
+
 	if (argc < 5 || argc > 6)
 		return (0);
 	while (--argc > 0)

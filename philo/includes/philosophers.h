@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:41:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/02/21 15:30:35 by acroue           ###   ########.fr       */
+/*   Updated: 2024/02/21 19:54:42 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-#define EBAD_ARG "Error, wrong arguments : \
+typedef struct s_arg
+{
+	int		start;
+	size_t	philo_nbr;
+}	t_arg;
+
+# define EBAD_ARG "Error, wrong arguments : \
 ./philosophers number_of_philosopher\
 s time_to_die time_to_eat time_to_sleep \
 [number_of_times_each_philosopher_must_eat]\n"
