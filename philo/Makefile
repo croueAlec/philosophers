@@ -6,13 +6,12 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/02/20 17:46:26 by acroue           ###   ########.fr        #
+#    Updated: 2024/02/21 15:57:35 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Program name
 NAME = philosophers
-BONUS = philosophers_bonus
 
 # Colors
 DEFAULT    = \033[0m
@@ -26,24 +25,14 @@ CYAN    = \033[0;36m
 BWHITE    = \033[1;37m
 
 # Directories
-LIBS_DIR = libs
 SRCS_DIR = srcs
 INCS_DIR = includes
-BONUS_DIR = bonus
 OBJS_DIR = objs
-LIBFT_DIR = $(LIBS_DIR)/libft
 
 # Files
-LIBFT = $(LIBFT_DIR)/libft.a
-
-define LIB :=
-	$(LIBFT)
-endef
-LIB := $(strip $(LIB))
 
 define INCLUDES :=
 	$(INCS_DIR)
-	$(LIBFT_DIR)
 endef
 INCLUDES := $(strip $(INCLUDES))
 
@@ -52,13 +41,7 @@ define SRC :=
 endef
 SRC := $(strip $(SRC))
 
-define BONUS_SRC :=
-	$(addprefix $(BONUS_DIR)/, EXAMPLE_BONUS.c)
-endef
-BONUS_SRC := $(strip $(BONUS_SRC))
-
 OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRC))
-BONUS_OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(BONUS_SRC))
 
 # Utils
 CC = cc
@@ -70,13 +53,13 @@ LIB_FLAGS = --no-print-directory --silent
 # Rules
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): $(OBJ)
 	@echo "$(GREEN)* Assembling $(BWHITE)$@$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $@
+	@$(CC) $(CFLAGS) $(OBJ) -o $@
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@echo "$(CYAN)- Compiling$(DEFAULT) $<"
-	@mkdir -p $(OBJS_DIR)/$(BONUS_DIR)
+	@mkdir -p $(OBJS_DIR)/
 	@$(CC) $(CFLAGS) $(INCLUDES_FLAGS) -c $< -o $@
 
 clean:
@@ -86,35 +69,12 @@ clean:
 fclean: clean
 	@echo "$(RED)! Removing$(DEFAULT) $(NAME)"
 	@$(RM) $(NAME)
-	@echo "$(RED)! Removing$(DEFAULT) $(BONUS)"
-	@$(RM) $(BONUS)
 
 re: fclean all
-
-$(LIBFT):
-	@echo "$(CYAN)~ Compiling$(DEFAULT) $(PURPLE)$(LIBFT_DIR)$(DEFAULT)"
-	@make -C $(LIBFT_DIR) $(LIB_FLAGS)
-
-cleanlib:
-	@echo "$(RED)! Removing$(DEFAULT) $(PURPLE)$(LIBFT_DIR)$(DEFAULT)"
-	@make clean -C $(LIBFT_DIR) $(LIB_FLAGS)
-
-fcleanlib:
-	@echo "$(RED)! Removing$(DEFAULT) $(PURPLE)$(LIBFT_DIR)$(DEFAULT)"
-	@make fclean -C $(LIBFT_DIR) $(LIB_FLAGS)
-
-relib: fcleanlib $(LIBFT)
-
-bonus: $(BONUS)
-
-$(BONUS): $(LIBFT) $(OBJ)
-	@echo "$(GREEN)* Assembling $(BWHITE)$@$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(BONUS)
 
 cre:
 	@clear
 	@make re --no-print-directory
 
 norm:
-	@norminette $(SRCS_DIR) $(INCS_DIR) $(BONUS_DIR) | awk '/'Error'/ {print; found=1} END {if (!found) print "$(PURPLE)Norm O.K.$(DEFAULT)"}'
-	@norminette $(LIBFT_DIR) | awk '/'Error'/ {print; found=1} END {if (!found) print "$(YELLOW)Norm libft O.K.$(DEFAULT)"}'
+	@norminette $(SRCS_DIR) $(INCS_DIR) | awk '/'Error'/ {print; found=1} END {if (!found) print "$(PURPLE)Norm O.K.$(DEFAULT)"}'

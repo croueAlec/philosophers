@@ -1,6 +1,7 @@
 # Own ignores
 philosophers
 philosophers_bonus
+test
 
 # Prerequisites
 *.d
