@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/02/21 15:57:35 by acroue           ###   ########.fr        #
+#    Updated: 2024/04/23 14:42:30 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,16 +25,9 @@ CYAN    = \033[0;36m
 BWHITE    = \033[1;37m
 
 # Directories
-SRCS_DIR = srcs
-INCS_DIR = includes
 OBJS_DIR = objs
 
 # Files
-
-define INCLUDES :=
-	$(INCS_DIR)
-endef
-INCLUDES := $(strip $(INCLUDES))
 
 define SRC :=
 	main.c
@@ -47,7 +40,6 @@ OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRC))
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rf
-INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
 LIB_FLAGS = --no-print-directory --silent
 
 # Rules
@@ -57,10 +49,10 @@ $(NAME): $(OBJ)
 	@echo "$(GREEN)* Assembling $(BWHITE)$@$(DEFAULT)"
 	@$(CC) $(CFLAGS) $(OBJ) -o $@
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+$(OBJS_DIR)/%.o: %.c
 	@echo "$(CYAN)- Compiling$(DEFAULT) $<"
 	@mkdir -p $(OBJS_DIR)/
-	@$(CC) $(CFLAGS) $(INCLUDES_FLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@echo "$(RED)! Removing$(DEFAULT) ${OBJS_DIR} files"
@@ -77,4 +69,4 @@ cre:
 	@make re --no-print-directory
 
 norm:
-	@norminette $(SRCS_DIR) $(INCS_DIR) | awk '/'Error'/ {print; found=1} END {if (!found) print "$(PURPLE)Norm O.K.$(DEFAULT)"}'
+	@norminette | awk '/'Error'/ {print; found=1} END {if (!found) print "$(PURPLE)Norm O.K.$(DEFAULT)"}'
