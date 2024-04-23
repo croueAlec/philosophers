@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/04/23 14:42:30 by acroue           ###   ########.fr        #
+#    Updated: 2024/04/23 17:47:39 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ OBJS_DIR = objs
 
 define SRC :=
 	main.c
+	philo_init.c
 endef
 SRC := $(strip $(SRC))
 
