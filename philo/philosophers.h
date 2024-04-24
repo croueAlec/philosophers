@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:41:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/24 15:36:32 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/24 18:11:11 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,10 @@ s time_to_die time_to_eat time_to_sleep \
 # define TIM_ERR "Failed to get time\n"
 # define USLEEP_DELAY 10000
 
-t_philo	**create_philosophers(t_params *par);
+t_philo	*create_philosophers(t_params *par);
 int		arg_check(int argc, char **argv, t_params *par);
 size_t	ft_strlen(char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
-void	ft_free_philo(t_philo **split_array, size_t j);
 
 #endif
 

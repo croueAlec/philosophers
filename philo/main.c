@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:43:07 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/24 15:42:27 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/24 18:09:50 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ static void	print_stats(t_params *par)
 	
 }
 
-static void	print_each_philo(t_philo **table)
+static void	print_each_philo(t_philo *table)
 {
 	size_t	i;
 	struct timeval	tv;
 
 	i = 0;
-	while (i < table[0]->par->philo_nbr)
+	while (i < table[0].par->philo_nbr)
 	{
 		gettimeofday(&tv, NULL);
-		printf("je suis le %zu philo\n", table[i]->philo_nbr);
-		printf("%zu usec elapsed\n", tv.tv_usec - table[0]->par->useconds);
+		printf("je suis le %zu philo\n", table[i].philo_nbr);
+		printf("%zu usec elapsed\n", tv.tv_usec - table[0].par->useconds);
 		i++;
 	}
 }
@@ -50,7 +50,7 @@ static void	print_each_philo(t_philo **table)
 int	main(int argc, char *argv[])
 {
 	t_params	par;
-	t_philo		**table;
+	t_philo		*table;
 
 	if (!arg_check(argc, argv, &par))
 		return ((void)write(2, EBAD_ARG, ft_strlen(EBAD_ARG)), 1);
@@ -60,5 +60,5 @@ int	main(int argc, char *argv[])
 	if (!table)
 		return (2);
 	print_each_philo(table);
-	return (ft_free_philo(table, par.philo_nbr), 0);
+	return (free(table), 0);
 }
