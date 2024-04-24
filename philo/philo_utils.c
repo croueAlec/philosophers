@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 14:44:06 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/24 14:55:14 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/24 17:58:31 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,6 @@ int	ft_usleep(__useconds_t usec)
 	return (i == nbr_of_naps);
 }
 
-static void	ft_bzero(void *s, size_t n)
-{
-	size_t	i;
-	char	*str;
-
-	str = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = '\0';
-		i++;
-	}
-}
-
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*buffer;
@@ -53,7 +39,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	buffer = malloc(nmemb * size);
 	if (!buffer)
 		return (NULL);
-	ft_bzero(buffer, nmemb * size);
+	memset(buffer, '\0', nmemb * size);
 	return (buffer);
 }
 
