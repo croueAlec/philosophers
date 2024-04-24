@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 14:44:06 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/24 18:11:15 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/24 18:23:52 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		return (NULL);
 	memset(buffer, '\0', nmemb * size);
 	return (buffer);
+}
+
+suseconds_t	get_curr_time(void)
+{
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL) < 0)
+		return (-1);
+	return (tv.tv_usec);
 }
 
 /* 

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:43:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/24 18:10:28 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/24 18:24:34 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,11 @@ t_philo	*create_philosophers(t_params *par)
 {
 	t_philo	*table;
 	size_t	i;
-	struct timeval	tv;
 
 	i = 0;
-	if (gettimeofday(&tv, NULL) < 0)
-		return ((void)write(2, TIM_ERR, 20), NULL);
-	par->useconds = tv.tv_usec;
+	par->useconds = get_curr_time();
+	if (par->useconds == -1)
+		return ((void)write(2, TIM_ERR, 20), -1);
 	table = ft_calloc(par->philo_nbr, sizeof(t_philo));
 	if (!table)
 		return ((void)write(2, MAL_ERR, 14), free(table), NULL);
