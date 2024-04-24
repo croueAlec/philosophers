@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:43:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/23 17:46:47 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/24 15:42:53 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,43 @@ int	arg_check(int argc, char **argv, t_params *par)
 	par->time_to_sleep = ft_philo_atoi(argv[4]);
 	return ((par->philo_nbr * par->time_to_die * par->time_to_eat * \
 	par->time_to_sleep) > 0 && (argc == 5 || par->min_meal > 0));
+}
+
+/**
+ * @brief They think therefore they are.
+ */
+static t_philo	*define_philosopher(t_params *par, size_t philo_number)
+{
+	t_philo	*philosopher;
+
+	philosopher = ft_calloc(1, sizeof(t_philo));
+	philosopher->meals_to_eat = par->min_meal;
+	philosopher->philo_nbr = philo_number;
+	philosopher->status = THINKING;
+	philosopher->par = par;
+	return (philosopher);
+}
+
+/**
+ * @brief Creates the philosophers that eat at the **table.
+ */
+t_philo	**create_philosophers(t_params *par)
+{
+	t_philo	**table;
+	size_t	i;
+	struct timeval	tv;
+
+	i = 0;
+	if (gettimeofday(&tv, NULL) < 0)
+		return ((void)write(2, TIM_ERR, 20), NULL);
+	par->useconds = tv.tv_usec;
+	table = ft_calloc(par->philo_nbr, sizeof(t_philo *));
+	while (i < par->philo_nbr)
+	{
+		if (!table || (i && !table[i - 1]))
+			return ((void)write(2, MAL_ERR, 14), ft_free_philo(table, i), NULL);
+		table[i] = define_philosopher(par, i);
+		i++;
+	}
+	return (table);
 }
