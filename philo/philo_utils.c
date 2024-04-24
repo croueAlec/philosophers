@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 14:44:06 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/24 17:58:31 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/24 18:11:15 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		return (NULL);
 	memset(buffer, '\0', nmemb * size);
 	return (buffer);
-}
-
-void	ft_free_philo(t_philo **split_array, size_t j)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < j)
-	{
-		free(split_array[i]);
-		i++;
-	}
-	free(split_array);
-	return ;
 }
 
 /* 
