@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:41:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/24 18:24:21 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/25 13:34:51 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ typedef struct s_philosophers
 }	t_philo;
 
 
-# define EBAD_ARG "Error, arguments must be positive : \n\
+# define EBAD_ARG "Error, arguments must be positive, there must be at most \
+300 philosophers : \n\
 ./philosophers number_of_philosopher\
 s time_to_die time_to_eat time_to_sleep \
 [number_of_times_each_philosopher_must_eat]\n"

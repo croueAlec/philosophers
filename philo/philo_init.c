@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:43:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/24 18:24:34 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/25 13:37:50 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	arg_check(int argc, char **argv, t_params *par)
 	par->time_to_die = ft_philo_atoi(argv[2]);
 	par->time_to_eat = ft_philo_atoi(argv[3]);
 	par->time_to_sleep = ft_philo_atoi(argv[4]);
-	return ((par->philo_nbr * par->time_to_die * par->time_to_eat * \
-	par->time_to_sleep) > 0 && (argc == 5 || par->min_meal > 0));
+	return ((argc == 5 || par->min_meal > 0) && par->philo_nbr <= 300 && 0 < (
+	par->philo_nbr * par->time_to_die * par->time_to_eat * par->time_to_sleep));
 }
 
 /**
@@ -98,7 +98,7 @@ t_philo	*create_philosophers(t_params *par)
 	i = 0;
 	par->useconds = get_curr_time();
 	if (par->useconds == -1)
-		return ((void)write(2, TIM_ERR, 20), -1);
+		return ((void)write(2, TIM_ERR, 20), NULL);
 	table = ft_calloc(par->philo_nbr, sizeof(t_philo));
 	if (!table)
 		return ((void)write(2, MAL_ERR, 14), free(table), NULL);
