@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:43:07 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/24 18:09:50 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/25 14:18:50 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ static void	print_stats(t_params *par)
 	par->time_to_die, par->time_to_eat, par->time_to_sleep);
 	if (par->min_meal)
 		printf("and they all need to eat at least %zu times.\n", par->min_meal);
-	
 }
 
 static void	print_each_philo(t_philo *table)
 {
-	size_t	i;
+	size_t			i;
 	struct timeval	tv;
 
 	i = 0;

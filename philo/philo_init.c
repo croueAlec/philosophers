@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:43:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/25 13:37:50 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/25 14:19:14 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	arg_check(int argc, char **argv, t_params *par)
 	par->time_to_die = ft_philo_atoi(argv[2]);
 	par->time_to_eat = ft_philo_atoi(argv[3]);
 	par->time_to_sleep = ft_philo_atoi(argv[4]);
-	return ((argc == 5 || par->min_meal > 0) && par->philo_nbr <= 300 && 0 < (
+	return ((argc == 5 || par->min_meal > 0) && par->philo_nbr <= 300 && 0 < (\
 	par->philo_nbr * par->time_to_die * par->time_to_eat * par->time_to_sleep));
 }
 

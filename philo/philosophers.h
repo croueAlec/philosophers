@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:41:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/25 13:34:51 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/25 14:18:23 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_philosophers
 	t_status	status;
 	t_params	*par;
 }	t_philo;
-
 
 # define EBAD_ARG "Error, arguments must be positive, there must be at most \
 300 philosophers : \n\
