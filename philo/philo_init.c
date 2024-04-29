@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:43:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/25 14:19:14 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/29 16:58:12 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,29 @@ static t_philo	define_philosopher(t_params *par, size_t philo_number)
 	t_philo	philosopher;
 
 	philosopher.meals_to_eat = par->min_meal;
-	philosopher.philo_nbr = philo_number;
+	philosopher.philo_id = philo_number;
 	philosopher.status = THINKING;
 	philosopher.par = par;
+	init_thread(&philosopher, &par->forks[philo_number], philo_number);
 	return (philosopher);
+}
+
+t_philo	*free_philos(t_philo *table, size_t index, t_params *par)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < index)
+	{
+		pthread_join(table[i].thread_id, NULL);
+		pthread_mutex_destroy(&table[i].own_fork->mutex);
+		i++;
+	}
+	free(table);
+	pthread_mutex_destroy(&par->full_courses_eaten.mutex);
+	printf("pasteque %d\n", 15);
+	pthread_mutex_destroy(&par->run.mutex);
+	return (free(par->forks), NULL);
 }
 
 /**
@@ -101,11 +120,19 @@ t_philo	*create_philosophers(t_params *par)
 		return ((void)write(2, TIM_ERR, 20), NULL);
 	table = ft_calloc(par->philo_nbr, sizeof(t_philo));
 	if (!table)
+		return ((void)write(2, MAL_ERR, 14), NULL);
+	par->forks = ft_calloc(par->philo_nbr, sizeof(t_mutex));
+	if (!par->forks)
 		return ((void)write(2, MAL_ERR, 14), free(table), NULL);
 	while (i < par->philo_nbr)
 	{
+		printf("[%zu]\n", i);
 		table[i] = define_philosopher(par, i);
+		if (!table[i].thread_id)
+			return (free_philos(table, i, par));
+		usleep(300);
 		i++;
 	}
+	set_mutex_var(&par->run, 1);
 	return (table);
 }

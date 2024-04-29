@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/04/24 15:16:00 by acroue           ###   ########.fr        #
+#    Updated: 2024/04/29 15:05:41 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ OBJS_DIR = objs
 
 define SRC :=
 	main.c
+	mutex_handling.c
+	mutex_init.c
 	philo_init.c
 	philo_utils.c
 endef
