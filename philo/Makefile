@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/04/29 15:05:41 by acroue           ###   ########.fr        #
+#    Updated: 2024/04/30 12:36:02 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ define SRC :=
 	mutex_init.c
 	philo_init.c
 	philo_utils.c
+	routine.c
 endef
 SRC := $(strip $(SRC))
 

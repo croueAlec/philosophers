@@ -6,13 +6,13 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 14:44:06 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/24 18:23:52 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/30 18:40:32 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_usleep(__useconds_t usec)
+int	ft_usleep(__useconds_t usec, t_mutex *run)
 {
 	size_t	i;
 	size_t	nbr_of_naps;
@@ -21,7 +21,7 @@ int	ft_usleep(__useconds_t usec)
 	if (usec < USLEEP_DELAY)
 		return (usleep(usec));
 	nbr_of_naps = usec / USLEEP_DELAY;
-	while (i < nbr_of_naps)
+	while (i < nbr_of_naps && get_mutex_var(run) == RUNNING)
 	{
 		usleep(USLEEP_DELAY);
 		i++;
@@ -43,13 +43,18 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (buffer);
 }
 
-suseconds_t	get_curr_time(void)
+time_t	get_curr_time(void)
 {
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL) < 0)
 		return (-1);
-	return (tv.tv_usec);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+time_t	time_since_start(t_philo *philo)
+{
+	return (get_curr_time() - philo->par->time_start);
 }
 
 /* 

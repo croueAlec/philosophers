@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:01:06 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/30 11:21:28 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/30 18:38:56 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	init_thread(t_philo *philo, t_mutex *fork, size_t i)
 	if (!fork)
 		return (0);
 	philo->own_fork = fork;
-	if (pthread_create(&philo->thread_id, NULL, &test_routine, philo))
+	if (pthread_create(&philo->thread_id, NULL, &routine, philo))
 		return (pthread_mutex_destroy(&fork->mutex), 0);
 	// printf("\t\t\ti == %zu\n", i);
 	return (1);

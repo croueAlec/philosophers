@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:43:07 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/30 11:30:31 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/30 12:27:52 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char *argv[])
 	write(1, "Nul n'entre ici s'il n'est philosophe\n", 39);
 	print_stats(&par);
 	if (!define_params_mutex(&par.full_courses_eaten, &par.run, &par.write))
-		return ((void)write(2, "Mutex fail.\n", 13), 3);
+		return ((void)write(2, MUT_ERR, 12), 3);
 	table = create_philosophers(&par);
 	if (!table)
 		return (2);
