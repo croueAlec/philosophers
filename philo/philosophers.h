@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:41:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/29 15:35:04 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/30 11:23:18 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ typedef enum e_status
 	SLEEPING = 3
 }			t_status;
 
+typedef enum e_simulation
+{
+	WAITING = 0,
+	RUNNING = 1
+}			t_sim;
+
 typedef struct s_mutex
 {
 	pthread_mutex_t	mutex;
@@ -46,6 +52,7 @@ typedef struct s_parameters
 	t_mutex		*forks;
 	t_mutex		run;
 	t_mutex		full_courses_eaten;
+	t_mutex		write;
 }	t_params;
 
 typedef struct s_philosophers
@@ -74,6 +81,7 @@ int			arg_check(int argc, char **argv, t_params *par);
 suseconds_t	get_curr_time(void);
 int			get_mutex_var(t_mutex *mutex);
 void		set_mutex_var(t_mutex *mutex, int var);
+void		increment_mutex_var(t_mutex *mutex);
 t_philo		*create_philosophers(t_params *par);
 int			init_thread(t_philo *philo, t_mutex *fork, size_t i);
 t_mutex		*init_mutex(t_mutex *mutex, size_t val);

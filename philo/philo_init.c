@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:43:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/29 16:58:12 by acroue           ###   ########.fr       */
+/*   Updated: 2024/04/30 11:22:04 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,13 @@ int	arg_check(int argc, char **argv, t_params *par)
 /**
  * @brief They think therefore they are.
  */
-static t_philo	define_philosopher(t_params *par, size_t philo_number)
+static int	define_philosopher(t_philo *p, t_params *par, size_t philo_number)
 {
-	t_philo	philosopher;
-
-	philosopher.meals_to_eat = par->min_meal;
-	philosopher.philo_id = philo_number;
-	philosopher.status = THINKING;
-	philosopher.par = par;
-	init_thread(&philosopher, &par->forks[philo_number], philo_number);
-	return (philosopher);
+	p->meals_to_eat = par->min_meal;
+	p->philo_id = philo_number;
+	p->status = THINKING;
+	p->par = par;
+	return (init_thread(p, &par->forks[philo_number], philo_number));
 }
 
 t_philo	*free_philos(t_philo *table, size_t index, t_params *par)
@@ -93,6 +90,8 @@ t_philo	*free_philos(t_philo *table, size_t index, t_params *par)
 	size_t	i;
 
 	i = 0;
+	while ((size_t)get_mutex_var(&par->full_courses_eaten) != par->philo_nbr)
+		usleep(1000);
 	while (i < index)
 	{
 		pthread_join(table[i].thread_id, NULL);
@@ -126,13 +125,14 @@ t_philo	*create_philosophers(t_params *par)
 		return ((void)write(2, MAL_ERR, 14), free(table), NULL);
 	while (i < par->philo_nbr)
 	{
-		printf("[%zu]\n", i);
-		table[i] = define_philosopher(par, i);
+		printf("\t\t\ti = %zu\n", i);
+		define_philosopher(&table[i], par, i);
 		if (!table[i].thread_id)
 			return (free_philos(table, i, par));
 		usleep(300);
 		i++;
 	}
-	set_mutex_var(&par->run, 1);
+	while (i--)
+		table[i].other_fork = table[(1 + i) % par->philo_nbr].own_fork;
 	return (table);
 }
