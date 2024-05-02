@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:43:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/02 14:14:37 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/02 17:10:38 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,14 @@ t_philo	*free_philos(t_philo *table, size_t index, t_params *par)
 	size_t	i;
 
 	i = 0;
-	while ((size_t)get_mutex_var(&par->full_courses_eaten) != par->philo_nbr)
+	// while ((size_t)get_mutex_var(&par->full_courses_eaten) != par->philo_nbr)
+	// 	usleep(1000);
+	while (get_mutex_var(&par->run) == RUNNING)
+	{
 		usleep(1000);
+		if ((size_t)get_mutex_var(&par->full_courses_eaten) == par->philo_nbr)
+			set_mutex_var(&par->run, WAITING);
+	}
 	while (i < index)
 	{
 		pthread_join(table[i].thread_id, NULL);
@@ -101,7 +107,6 @@ t_philo	*free_philos(t_philo *table, size_t index, t_params *par)
 	}
 	free(table);
 	pthread_mutex_destroy(&par->full_courses_eaten.mutex);
-	printf("pasteque %d\n", 15);
 	pthread_mutex_destroy(&par->run.mutex);
 	return (free(par->forks), NULL);
 }

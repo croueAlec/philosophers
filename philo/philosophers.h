@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:41:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/02 14:17:44 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/02 16:53:11 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ t_mutex		*init_mutex(t_mutex *mutex, size_t val);
 int			print_log(t_philo *philo, t_status status);
 int			is_philo_dead(t_philo *philo);
 int			pick_up_fork(t_philo *philo, t_mutex *mutex);
+void		put_fork_down(t_philo *philo);
 void		*routine(void *varg);
 t_philo		*free_philos(t_philo *table, size_t index, t_params *par);
 

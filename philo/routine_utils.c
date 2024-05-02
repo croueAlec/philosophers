@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:03:38 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/02 14:42:18 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/02 16:54:10 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	print_log(t_philo *philo, t_status status)
 	else if (status == DEAD)
 		printf(" died\n");
 	pthread_mutex_unlock(&philo->par->write.mutex);
-	return (status != DEAD);
+	return (status == DEAD);
 }
 
 int	pick_up_fork(t_philo *philo, t_mutex *mutex)
@@ -44,18 +44,27 @@ int	pick_up_fork(t_philo *philo, t_mutex *mutex)
 	return (1);
 }
 
+void	put_fork_down(t_philo *philo)
+{
+	set_mutex_var(philo->own_fork, AVAILABLE_FORK);
+	set_mutex_var(philo->other_fork, AVAILABLE_FORK);
+}
+
 void	kill_philo(t_philo *philo)
 {
 	set_mutex_var(&philo->par->run, WAITING);
-	// printf("kill\n");
+	printf("kill\n");
 	print_log(philo, DEAD);
 }
 
 int	is_philo_dead(t_philo *philo)
 {
+	time_t	curr;
 	time_t	delay;
 
-	delay = (get_curr_time() - philo->last_meal);
+	curr = get_curr_time();
+	// printf(">%ld %zu", curr, philo->last_meal);
+	delay = (curr - philo->last_meal);
 	// printf("%zu %zu\n", (size_t)delay, philo->par->time_to_die);
 	if (((size_t)delay) > philo->par->time_to_die)
 		return ((void)kill_philo(philo), 2);
