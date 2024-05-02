@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:41:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/30 14:16:35 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/02 14:17:44 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,12 @@ s time_to_die time_to_eat time_to_sleep \
 # define MAL_ERR "Malloc error\n"
 # define TIM_ERR "Failed to get time\n"
 # define MUT_ERR "Mutex fail\n"
-# define USLEEP_DELAY 1000
+# define USLEEP_DELAY 250
+# define AVAILABLE_FORK 500
 
 size_t		ft_strlen(char *str);
 void		*ft_calloc(size_t nmemb, size_t size);
-int			ft_usleep(__useconds_t usec, t_mutex *run);
+int			ft_usleep(__useconds_t usec, t_mutex *run, t_philo *philo);
 int			arg_check(int argc, char **argv, t_params *par);
 time_t		get_curr_time(void);
 time_t		time_since_start(t_philo *philo);
@@ -88,9 +89,12 @@ int			get_mutex_var(t_mutex *mutex);
 void		set_mutex_var(t_mutex *mutex, int var);
 void		increment_mutex_var(t_mutex *mutex);
 t_philo		*create_philosophers(t_params *par);
-void		*routine(void *varg);
 int			init_thread(t_philo *philo, t_mutex *fork, size_t i);
 t_mutex		*init_mutex(t_mutex *mutex, size_t val);
+int			print_log(t_philo *philo, t_status status);
+int			is_philo_dead(t_philo *philo);
+int			pick_up_fork(t_philo *philo, t_mutex *mutex);
+void		*routine(void *varg);
 t_philo		*free_philos(t_philo *table, size_t index, t_params *par);
 
 #endif

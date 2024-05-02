@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:43:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/30 14:44:10 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/02 14:14:37 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	define_philosopher(t_philo *p, t_params *par, size_t philo_number)
 	p->status = THINKING;
 	p->par = par;
 	p->last_meal = get_curr_time();
-	return (init_thread(p, &par->forks[philo_number], philo_number));
+	return (init_thread(p, &par->forks[philo_number], AVAILABLE_FORK));
 }
 
 t_philo	*free_philos(t_philo *table, size_t index, t_params *par)

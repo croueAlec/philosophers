@@ -6,26 +6,30 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 14:44:06 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/30 18:40:32 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/02 14:41:50 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_usleep(__useconds_t usec, t_mutex *run)
+int	ft_usleep(__useconds_t usec, t_mutex *run, t_philo *philo)
 {
 	size_t	i;
 	size_t	nbr_of_naps;
 
 	i = 0;
+	// printf("a\n");
+	if (is_philo_dead(philo) == 2)
+		return (0);
 	if (usec < USLEEP_DELAY)
-		return (usleep(usec));
+		return ((void)usleep(usec), 1);
 	nbr_of_naps = usec / USLEEP_DELAY;
 	while (i < nbr_of_naps && get_mutex_var(run) == RUNNING)
 	{
 		usleep(USLEEP_DELAY);
 		i++;
 	}
+	printf("salut\n");
 	return (i == nbr_of_naps);
 }
 
