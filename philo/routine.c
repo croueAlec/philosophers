@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:29:45 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/02 17:11:52 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/03 11:13:58 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,29 @@ int	eat(t_philo *philo)
 	if (is_philo_dead(philo))
 		return (0);
 	if (philo->philo_id % 2)
-		if (!pick_up_fork(philo, philo->own_fork)/*  && printf("f1\n") */)
-			return (0);
-	if (!pick_up_fork(philo, philo->other_fork)/*  && printf("f2\n") */)
-		return (0);
-	if (philo->philo_id % 2 == 0/*  && printf("f3\n") */)
 		if (!pick_up_fork(philo, philo->own_fork))
 			return (0);
-	// printf("f3\n");
+	if (!pick_up_fork(philo, philo->other_fork))
+		return (0);
+	if (philo->philo_id % 2 == 0)
+		if (!pick_up_fork(philo, philo->own_fork))
+			return (0);
 	if (print_log(philo, EATING))
 		return (0);
-	// printf("check %zu\n", philo->philo_id);
 	if (!ft_usleep(philo->par->time_to_eat, &philo->par->run, philo))
 		return (0);
 	put_fork_down(philo);
-	// printf("%zu ate\n", philo->philo_id);
 	philo->last_meal = get_curr_time();
 	if (philo->meals_to_eat--)
-		if (philo->meals_to_eat == 0 && printf("\t\t\t\t%zu ate all his meals\n", philo->philo_id))
+		if (philo->meals_to_eat == 0)
 			increment_mutex_var(&philo->par->full_courses_eaten);
 	return (1);
 }
-//TODO: finish eat functon
 
 int	sleep_routine(t_philo *philo)
 {
 	if (is_philo_dead(philo))
 		return (0);
-	// printf("sleep %zu\n", philo->philo_id);
 	if (print_log(philo, SLEEPING))
 		return (0);
 	return (ft_usleep(philo->par->time_to_sleep, &philo->par->run, philo));
@@ -52,7 +47,6 @@ int	sleep_routine(t_philo *philo)
 
 int	think(t_philo *philo)
 {
-	// printf("think %zu\n", philo->philo_id);
 	if (print_log(philo, THINKING))
 		return (0);
 	return (1);
@@ -69,8 +63,8 @@ void	*routine(void *varg)
 		usleep(1000);
 	while (eat(philo) && sleep_routine(philo) && think(philo))
 		;
-	// if (get_mutex_var(&philo->par->run) == WAITING)
-	// 	return (NULL);
-	// printf("J'ai pense, donc je fus %zu\n", philo->philo_id);
 	return (NULL);
 }
+
+//TODO: make cre && valhalla ./philosophers 5 800 200 200 7
+// make cre && valhalla ./philosophers 5 800 200 200

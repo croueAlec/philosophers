@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:43:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/02 17:10:38 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/03 11:11:27 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	arg_check(int argc, char **argv, t_params *par)
 	if (argc == 6)
 		par->min_meal = ft_philo_atoi(argv[5]);
 	par->philo_nbr = ft_philo_atoi(argv[1]);
-	par->time_to_die = ft_philo_atoi(argv[2]);
-	par->time_to_eat = ft_philo_atoi(argv[3]);
-	par->time_to_sleep = ft_philo_atoi(argv[4]);
+	par->time_to_die = ft_philo_atoi(argv[2]) * 1000;
+	par->time_to_eat = ft_philo_atoi(argv[3]) * 1000;
+	par->time_to_sleep = ft_philo_atoi(argv[4]) * 1000;
 	return ((argc == 5 || par->min_meal > 0) && par->philo_nbr <= 300 && 0 < (\
 	par->philo_nbr * par->time_to_die * par->time_to_eat * par->time_to_sleep));
 }
@@ -97,7 +97,9 @@ t_philo	*free_philos(t_philo *table, size_t index, t_params *par)
 	{
 		usleep(1000);
 		if ((size_t)get_mutex_var(&par->full_courses_eaten) == par->philo_nbr)
+		{
 			set_mutex_var(&par->run, WAITING);
+		}
 	}
 	while (i < index)
 	{
