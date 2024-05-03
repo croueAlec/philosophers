@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:43:07 by acroue            #+#    #+#             */
-/*   Updated: 2024/04/30 12:27:52 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/03 11:21:21 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@ size_t	ft_strlen(char *str)
 	while (str && str[i] != '\0')
 		i++;
 	return (i);
-}
-
-static void	print_stats(t_params *par)
-{
-	printf("%zu Philosophers\nThey take :\n\t\t%zu Useconds to die\n\t\
-	%zu Useconds to eat\n\t\t%zu Useconds to sleep\n", par->philo_nbr, \
-	par->time_to_die, par->time_to_eat, par->time_to_sleep);
-	if (par->min_meal)
-		printf("and they all need to eat at least %zu times.\n", par->min_meal);
 }
 
 /**
@@ -59,8 +50,6 @@ int	main(int argc, char *argv[])
 
 	if (!arg_check(argc, argv, &par))
 		return ((void)write(2, EBAD_ARG, ft_strlen(EBAD_ARG)), 1);
-	write(1, "Nul n'entre ici s'il n'est philosophe\n", 39);
-	print_stats(&par);
 	if (!define_params_mutex(&par.full_courses_eaten, &par.run, &par.write))
 		return ((void)write(2, MUT_ERR, 12), 3);
 	table = create_philosophers(&par);

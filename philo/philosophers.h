@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:41:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/02 16:53:11 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/03 11:15:05 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_philosophers
 	t_mutex		*own_fork;
 	t_mutex		*other_fork;
 	pthread_t	thread_id;
-	time_t	last_meal;
+	time_t		last_meal;
 }	t_philo;
 
 # define EBAD_ARG "Error, arguments must be positive, there must be at most \

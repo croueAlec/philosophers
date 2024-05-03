@@ -6,7 +6,7 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/05/02 14:05:59 by acroue           ###   ########.fr        #
+#    Updated: 2024/05/03 11:22:21 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ OBJS_DIR = objs
 # Files
 
 define SRC :=
+	logs.c
 	main.c
 	mutex_handling.c
 	mutex_init.c
@@ -46,7 +47,6 @@ OBJ := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRC))
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rf
-LIB_FLAGS = --no-print-directory --silent
 
 # Rules
 all: $(NAME)

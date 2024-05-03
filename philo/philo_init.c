@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:43:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/03 11:11:27 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/03 11:21:44 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ t_philo	*free_philos(t_philo *table, size_t index, t_params *par)
 	size_t	i;
 
 	i = 0;
-	// while ((size_t)get_mutex_var(&par->full_courses_eaten) != par->philo_nbr)
-	// 	usleep(1000);
 	while (get_mutex_var(&par->run) == RUNNING)
 	{
 		usleep(1000);
@@ -133,7 +131,6 @@ t_philo	*create_philosophers(t_params *par)
 		return ((void)write(2, MAL_ERR, 14), free(table), NULL);
 	while (i < par->philo_nbr)
 	{
-		printf("\t\t\ti = %zu\n", i);
 		define_philosopher(&table[i], par, i);
 		if (!table[i].thread_id)
 			return (free_philos(table, i, par));
