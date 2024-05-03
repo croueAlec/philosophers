@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:43:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/03 11:21:44 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/03 14:18:32 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	arg_check(int argc, char **argv, t_params *par)
 static int	define_philosopher(t_philo *p, t_params *par, size_t philo_number)
 {
 	p->meals_to_eat = par->min_meal;
-	p->philo_id = philo_number;
+	p->philo_id = philo_number + 1;
 	p->status = THINKING;
 	p->par = par;
 	p->last_meal = get_curr_time();
