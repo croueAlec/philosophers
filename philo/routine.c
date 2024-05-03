@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:29:45 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/03 11:13:58 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/03 13:55:56 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	think(t_philo *philo)
 {
 	if (print_log(philo, THINKING))
 		return (0);
+	usleep(5);
 	return (1);
 }
 
@@ -65,6 +66,3 @@ void	*routine(void *varg)
 		;
 	return (NULL);
 }
-
-//TODO: make cre && valhalla ./philosophers 5 800 200 200 7
-// make cre && valhalla ./philosophers 5 800 200 200
