@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:03:38 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/03 11:19:31 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/03 16:49:02 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	pick_up_fork(t_philo *philo, t_mutex *mutex)
 	}
 	set_mutex_var(mutex, philo->philo_id);
 	if (is_philo_dead(philo))
-		return (kill_philo(philo), 0);
+		return (0);
 	print_log(philo, FORK);
 	return (1);
 }

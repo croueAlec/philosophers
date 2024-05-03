@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:41:17 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/03 11:15:05 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/03 16:56:28 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ s time_to_die time_to_eat time_to_sleep \
 # define MAL_ERR "Malloc error\n"
 # define TIM_ERR "Failed to get time\n"
 # define MUT_ERR "Mutex fail\n"
-# define USLEEP_DELAY 250
+# define USLEEP_DELAY 10000
 # define AVAILABLE_FORK 500
 
 size_t		ft_strlen(char *str);
