@@ -6,12 +6,12 @@
 #    By: acroue <acroue@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 11:51:52 by acroue            #+#    #+#              #
-#    Updated: 2024/05/03 11:22:21 by acroue           ###   ########.fr        #
+#    Updated: 2024/05/06 09:59:01 by acroue           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Program name
-NAME = philosophers
+NAME = philo
 
 # Colors
 DEFAULT    = \033[0m
