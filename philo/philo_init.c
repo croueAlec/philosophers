@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:43:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/03 14:18:32 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/06 09:57:19 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ t_philo	*free_philos(t_philo *table, size_t index, t_params *par)
 	free(table);
 	pthread_mutex_destroy(&par->full_courses_eaten.mutex);
 	pthread_mutex_destroy(&par->run.mutex);
+	pthread_mutex_destroy(&par->write.mutex);
 	return (free(par->forks), NULL);
 }
 
